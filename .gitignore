@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+.dermai/
+venv/
+env/
+.env
+.DS_Store
+
+# Data and model artifacts
+HAM10000*/
+data/raw/
+data/processed/
+data/chroma/
+outputs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.streamlit/secrets.toml

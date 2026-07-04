@@ -1,0 +1,3 @@
+Urgent dermatology safety guidance:
+
+Seek urgent medical care for rapidly spreading redness, fever, severe pain, pus, red streaking, swelling around the eyes, black or dusky skin, rapidly worsening wounds, or symptoms in someone who is immunocompromised. A clinician should assess possible infection, tissue injury, allergic reaction, or other acute causes. Software output should not delay urgent care.

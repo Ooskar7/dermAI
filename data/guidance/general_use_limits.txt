@@ -1,0 +1,3 @@
+Educational use limits:
+
+Image-based models can be affected by lighting, blur, camera quality, lesion cropping, skin tone, artifacts, and missing clinical history. A probability ranking is not a diagnosis and cannot rule out cancer, infection, allergic disease, or other conditions. Users should consult a qualified healthcare professional for medical advice.
