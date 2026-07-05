@@ -122,3 +122,20 @@ The app includes:
 - Introduction: purpose, supported classes, and safety limits
 - Model Training: data pipeline, model details, training process, and `history.csv` charts
 - DermAI Prediction: image upload, class probabilities, prediction table, and Grad-CAM overlay
+
+## Deploy on Render
+
+This repository includes `render.yaml` for Render Blueprint deployment. Render installs
+the Python dependencies from `requirements.txt` and starts the Streamlit app with:
+
+```bash
+streamlit run app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
+```
+
+The deployed app expects an inference checkpoint at `outputs/efficientnet_b0/best.pt`.
+That checkpoint is intentionally allowed in `.gitignore` so it can be committed and
+available during deployment. The latest training checkpoint, `last.pt`, remains ignored.
+
+The checkpoint path can be changed with the `DERMAI_CHECKPOINT_PATH` environment variable.
+Python is pinned to `3.12.9` in both `.python-version` and `render.yaml` to keep local and
+deployed runtimes aligned.

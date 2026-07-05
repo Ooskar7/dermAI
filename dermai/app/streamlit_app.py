@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any
 
@@ -11,7 +12,10 @@ from dermai.gradcam.gradcam import generate_gradcam_overlay
 from dermai.inference.inference import DermAIInference, load_image
 from dermai.labels import HAM10000_LABEL_DESCRIPTIONS, HAM10000_LABELS
 
-DEFAULT_CHECKPOINT_PATH = "outputs/efficientnet_b0/best.pt"
+DEFAULT_CHECKPOINT_PATH = os.environ.get(
+    "DERMAI_CHECKPOINT_PATH",
+    "outputs/efficientnet_b0/best.pt",
+)
 DEFAULT_HISTORY_PATH = Path("outputs/efficientnet_b0/history.csv")
 PAGE_INTRODUCTION = "Introduction"
 PAGE_MODEL_TRAINING = "Model Training"
