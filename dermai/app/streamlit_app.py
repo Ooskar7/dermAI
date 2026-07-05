@@ -18,6 +18,228 @@ PAGE_MODEL_TRAINING = "Model Training"
 PAGE_DERMAI_PREDICTION = "DermAI Prediction"
 
 
+def apply_custom_styles() -> None:
+    st.markdown(
+        """
+        <style>
+        :root {
+            --dermai-ink: #1f2937;
+            --dermai-muted: #5f6b7a;
+            --dermai-teal: #126b64;
+            --dermai-teal-soft: #e4f4f1;
+            --dermai-teal-border: #94cbc4;
+            --dermai-amber: #7a5600;
+            --dermai-amber-soft: #fff4d8;
+            --dermai-amber-border: #d6a32a;
+            --dermai-panel: #f7fafc;
+        }
+
+        .stApp,
+        [data-testid="stAppViewContainer"],
+        [data-testid="stHeader"] {
+            background: #ffffff;
+            color: var(--dermai-ink);
+        }
+
+        .block-container {
+            max-width: 1120px;
+            padding-top: 4.5rem;
+            padding-bottom: 4rem;
+        }
+
+        h1 {
+            color: var(--dermai-ink);
+            font-size: 4.25rem !important;
+            line-height: 1.02 !important;
+            letter-spacing: 0 !important;
+            margin-bottom: 0.6rem !important;
+        }
+
+        h2, h3 {
+            color: var(--dermai-ink);
+            letter-spacing: 0 !important;
+        }
+
+        [data-testid="stMarkdownContainer"] p,
+        [data-testid="stMarkdownContainer"] li {
+            color: #374151;
+            font-size: 1.02rem;
+            line-height: 1.62;
+        }
+
+        [data-testid="stCaptionContainer"] {
+            color: #7b8492;
+            font-size: 1.02rem;
+        }
+
+        [data-testid="stSidebar"] {
+            background: #ffffff;
+            border-right: 1px solid #dce5ea;
+        }
+
+        [data-testid="stSidebar"] > div {
+            padding: 1.55rem 1.35rem 1.4rem;
+        }
+
+        .sidebar-kicker {
+            color: var(--dermai-teal);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin: 0 0 0.65rem;
+        }
+
+        .sidebar-title {
+            color: var(--dermai-ink);
+            font-size: 1.72rem;
+            font-weight: 800;
+            line-height: 1.08;
+            margin: 0 0 1.75rem;
+        }
+
+        .sidebar-section-label {
+            color: #687385;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.07em;
+            margin: 1.7rem 0 0.65rem;
+            text-transform: uppercase;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] > label {
+            display: none;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] {
+            gap: 0.45rem;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label {
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 0.45rem;
+            color: #5e6876;
+            cursor: pointer;
+            display: flex;
+            font-size: 1.02rem;
+            font-weight: 750;
+            min-height: 3.1rem;
+            padding: 0.78rem 0.95rem;
+            transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+            width: 100%;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label:hover {
+            background: #f1f7f6;
+            color: var(--dermai-teal);
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) {
+            background: var(--dermai-teal-soft);
+            border-color: var(--dermai-teal-border);
+            color: var(--dermai-teal);
+            box-shadow: inset 0 0 0 1px rgba(18, 107, 100, 0.02);
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label > div:first-child {
+            display: none;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label p {
+            color: inherit;
+            font-size: 1.02rem;
+            font-weight: 750;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stTextInput"] input {
+            background: #ffffff;
+            border: 1px solid #e2e8ef;
+            border-radius: 0.45rem;
+            color: var(--dermai-ink);
+            min-height: 3rem;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stSlider"] {
+            padding-top: 0.2rem;
+        }
+
+        .checkpoint-card,
+        .safety-card {
+            border-radius: 0.55rem;
+            padding: 1rem 1.05rem;
+        }
+
+        .checkpoint-card {
+            background: #e7f6ee;
+            border: 1px solid #b9dfca;
+            color: #19753b;
+            font-weight: 800;
+            margin-top: 1.1rem;
+        }
+
+        .checkpoint-card.missing {
+            background: #fff1f0;
+            border-color: #f4b9b2;
+            color: #9f2d20;
+        }
+
+        .checkpoint-path {
+            color: #7a8492;
+            font-size: 0.86rem;
+            margin-top: 0.55rem;
+            overflow-wrap: anywhere;
+        }
+
+        .safety-card {
+            background: var(--dermai-amber-soft);
+            border: 1px solid var(--dermai-amber-border);
+            color: #4f3b06;
+            margin-top: 2rem;
+        }
+
+        .safety-card strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .safety-card span {
+            display: block;
+            font-size: 0.9rem;
+            line-height: 1.28;
+        }
+
+        .section-kicker {
+            color: var(--dermai-teal);
+            font-size: 0.88rem;
+            font-weight: 850;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
+        .intro-callout {
+            background: var(--dermai-panel);
+            border: 1px solid #e2e8ef;
+            border-radius: 0.55rem;
+            padding: 1.05rem 1.15rem;
+        }
+
+        @media (max-width: 900px) {
+            h1 {
+                font-size: 3rem !important;
+            }
+            .block-container {
+                padding-top: 2.5rem;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 @st.cache_resource(show_spinner=False)
 def load_inference(checkpoint_path: str) -> DermAIInference:
     return DermAIInference(checkpoint_path)
@@ -25,27 +247,54 @@ def load_inference(checkpoint_path: str) -> DermAIInference:
 
 def configure_page() -> None:
     st.set_page_config(page_title="DermAI MVP", page_icon=":mag:", layout="wide")
+    apply_custom_styles()
 
 
 def render_sidebar() -> dict[str, Any]:
     with st.sidebar:
-        st.header("DermAI")
+        st.markdown(
+            """
+            <div class="sidebar-kicker">Bachelor Thesis</div>
+            <div class="sidebar-title">DermAI<br>Image Recognition</div>
+            <div class="sidebar-section-label">Navigation</div>
+            """,
+            unsafe_allow_html=True,
+        )
         page = st.radio(
             "Navigation",
             [PAGE_INTRODUCTION, PAGE_MODEL_TRAINING, PAGE_DERMAI_PREDICTION],
+            label_visibility="collapsed",
         )
 
-        st.divider()
-        st.header("Settings")
+        st.markdown('<div class="sidebar-section-label">Settings</div>', unsafe_allow_html=True)
         checkpoint_path = st.text_input("Checkpoint path", value=DEFAULT_CHECKPOINT_PATH)
         top_k = st.slider("Prediction classes", min_value=3, max_value=7, value=7)
 
         checkpoint_exists = Path(checkpoint_path).exists()
+        status_class = "checkpoint-card" if checkpoint_exists else "checkpoint-card missing"
+        status_text = "Checkpoint found" if checkpoint_exists else "Checkpoint not found"
+        st.markdown(
+            f"""
+            <div class="{status_class}">{status_text}</div>
+            <div class="checkpoint-path">{checkpoint_path}</div>
+            """,
+            unsafe_allow_html=True,
+        )
+
         if checkpoint_exists:
-            st.success("Checkpoint found")
+            st.caption("Ready for image analysis.")
         else:
-            st.error("Checkpoint not found")
-        st.caption(checkpoint_path)
+            st.caption("Train a model or set a valid checkpoint path.")
+
+        st.markdown(
+            """
+            <div class="safety-card">
+                <strong>Educational demonstration only.</strong>
+                <span>This tool is not a medical diagnosis system and must not be used for clinical decisions.</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     return {
         "page": page,
@@ -55,9 +304,17 @@ def render_sidebar() -> dict[str, Any]:
     }
 
 
+def render_page_heading(title: str, caption: str) -> None:
+    st.markdown('<div class="section-kicker">Bachelor Thesis Project</div>', unsafe_allow_html=True)
+    st.title(title)
+    st.caption(caption)
+
+
 def render_introduction_page() -> None:
-    st.title("DermAI MVP")
-    st.caption("Educational skin lesion image recognition and explainability prototype.")
+    render_page_heading(
+        "Introduction",
+        "Educational skin lesion image recognition and explainability prototype.",
+    )
 
     st.markdown(
         """
@@ -103,8 +360,10 @@ def render_introduction_page() -> None:
 
 
 def render_training_page() -> None:
-    st.title("Model Training")
-    st.caption("Training workflow for the EfficientNet-B0 lesion image classifier.")
+    render_page_heading(
+        "Model Training",
+        "Training workflow for the EfficientNet-B0 lesion image classifier.",
+    )
 
     st.subheader("Data Pipeline")
     st.markdown(
@@ -216,8 +475,10 @@ def render_training_history(history_path: Path) -> None:
 
 
 def render_prediction_page(settings: dict[str, Any]) -> None:
-    st.title("DermAI Prediction")
-    st.caption("Upload one lesion image to view model predictions and a Grad-CAM explanation.")
+    render_page_heading(
+        "DermAI Prediction",
+        "Upload one lesion image to view model predictions and a Grad-CAM explanation.",
+    )
 
     uploaded_file = st.file_uploader("Upload a skin lesion image", type=["jpg", "jpeg", "png"])
     analyze = st.button("Analyze image", type="primary", disabled=uploaded_file is None)
@@ -323,11 +584,19 @@ def render_prediction_table(probability_df: pd.DataFrame) -> None:
 
 
 def render_static_safety_notice() -> None:
-    st.warning(
-        "Safety notice: DermAI is an educational prototype only. It is not a diagnostic medical "
-        "device and must not be used to decide whether a lesion is benign or malignant. Seek care "
-        "from a qualified clinician for changing, bleeding, painful, rapidly growing, or otherwise "
-        "concerning skin lesions."
+    st.markdown(
+        """
+        <div class="safety-card">
+            <strong>Safety notice</strong>
+            <span>
+                DermAI is an educational prototype only. It is not a diagnostic medical device
+                and must not be used to decide whether a lesion is benign or malignant. Seek care
+                from a qualified clinician for changing, bleeding, painful, rapidly growing, or
+                otherwise concerning skin lesions.
+            </span>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 
