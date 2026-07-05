@@ -14,11 +14,17 @@ HAM10000*/
 data/raw/
 data/processed/
 data/chroma/
-outputs/
 checkpoints/
 *.pt
 *.pth
 *.ckpt
+
+# Keep the deployable inference checkpoint in Git for Render.
+outputs/*
+!outputs/efficientnet_b0/
+outputs/efficientnet_b0/*
+!outputs/efficientnet_b0/best.pt
+!outputs/efficientnet_b0/history.csv
 
 # Tooling
 .pytest_cache/
