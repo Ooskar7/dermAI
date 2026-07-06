@@ -258,7 +258,7 @@ def render_sidebar() -> dict[str, Any]:
     with st.sidebar:
         st.markdown(
             """
-            <div class="sidebar-kicker">Bachelor Thesis</div>
+            <div class="sidebar-kicker">Medical Project</div>
             <div class="sidebar-title">DermAI<br>Image Recognition</div>
             <div class="sidebar-section-label">Navigation</div>
             """,
@@ -309,7 +309,7 @@ def render_sidebar() -> dict[str, Any]:
 
 
 def render_page_heading(title: str, caption: str) -> None:
-    st.markdown('<div class="section-kicker">Bachelor Thesis Project</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">Medical Image Recognition Project</div>', unsafe_allow_html=True)
     st.title(title)
     st.caption(caption)
 
