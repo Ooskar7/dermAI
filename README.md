@@ -1,8 +1,9 @@
 # DermAI MVP
 
 DermAI is a Streamlit-based educational prototype for skin lesion image recognition and
-explainability. It uses an EfficientNet-B0 classifier trained on HAM10000/ISIC-style
-dermoscopic lesion images and generates Grad-CAM overlays to visualize model attention.
+explainability. It uses an EfficientNet-B0 classifier trained on
+[ISIC 2018 Task 3 training data](https://challenge.isic-archive.com/data/#2018), which
+is the [HAM10000](https://doi.org/10.7910/DVN/DBW86T) dermoscopic image dataset, and generates Grad-CAM overlays to visualize model attention.
 
 This project is not a medical device and must not be used to diagnose disease, rule out
 cancer, choose treatment, or replace a dermatologist. The app is intended for educational
@@ -46,11 +47,18 @@ python scripts/check_environment.py
 
 ## Dataset expectations
 
-The training script accepts either HAM10000 metadata or ISIC 2018 task 3 ground truth.
+The training script accepts either
+[HAM10000 metadata](https://doi.org/10.7910/DVN/DBW86T) or
+[ISIC 2018 task 3 ground truth](https://challenge.isic-archive.com/data/#2018).
+This project was trained with the official ISIC 2018 Task 3 packages:
+`ISIC2018_Task3_Training_Input.zip` and `ISIC2018_Task3_Training_GroundTruth.zip`.
+Those packages are the HAM10000 training images and labels. The HAM10000 public data
+record is available from Harvard Dataverse, and the ISIC Challenge page provides the
+exact ISIC 2018 training input and ground-truth files used here.
 
 Supported metadata formats:
 
-- HAM10000 metadata with `image_id` and `dx` columns
+- [HAM10000 metadata](https://doi.org/10.7910/DVN/DBW86T) with `image_id` and `dx` columns
 - ISIC 2018 task 3 ground truth with `image` plus one-hot columns
   `MEL,NV,BCC,AKIEC,BKL,DF,VASC`
 
