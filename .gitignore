@@ -19,7 +19,7 @@ checkpoints/
 *.pth
 *.ckpt
 
-# Keep the deployable inference checkpoint in Git for Render.
+# Keep the deployable inference checkpoint in Git.
 outputs/*
 !outputs/efficientnet_b0/
 outputs/efficientnet_b0/*
