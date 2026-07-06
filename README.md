@@ -1,8 +1,9 @@
 # DermAI MVP
 
 DermAI is a Streamlit-based educational prototype for skin lesion image recognition and
-explainability. It uses an EfficientNet-B0 classifier trained on HAM10000/ISIC-style
-dermoscopic lesion images and generates Grad-CAM overlays to visualize model attention.
+explainability. It uses an EfficientNet-B0 classifier trained on
+[ISIC 2018 Task 3 training data](https://challenge.isic-archive.com/data/#2018), which
+is the [HAM10000](https://doi.org/10.7910/DVN/DBW86T) dermoscopic image dataset, and generates Grad-CAM overlays to visualize model attention.
 
 This project is not a medical device and must not be used to diagnose disease, rule out
 cancer, choose treatment, or replace a dermatologist. The app is intended for educational
@@ -46,11 +47,18 @@ python scripts/check_environment.py
 
 ## Dataset expectations
 
-The training script accepts either HAM10000 metadata or ISIC 2018 task 3 ground truth.
+The training script accepts either
+[HAM10000 metadata](https://doi.org/10.7910/DVN/DBW86T) or
+[ISIC 2018 task 3 ground truth](https://challenge.isic-archive.com/data/#2018).
+This project was trained with the official ISIC 2018 Task 3 packages:
+`ISIC2018_Task3_Training_Input.zip` and `ISIC2018_Task3_Training_GroundTruth.zip`.
+Those packages are the HAM10000 training images and labels. The HAM10000 public data
+record is available from Harvard Dataverse, and the ISIC Challenge page provides the
+exact ISIC 2018 training input and ground-truth files used here.
 
 Supported metadata formats:
 
-- HAM10000 metadata with `image_id` and `dx` columns
+- [HAM10000 metadata](https://doi.org/10.7910/DVN/DBW86T) with `image_id` and `dx` columns
 - ISIC 2018 task 3 ground truth with `image` plus one-hot columns
   `MEL,NV,BCC,AKIEC,BKL,DF,VASC`
 
@@ -123,19 +131,23 @@ The app includes:
 - Model Training: data pipeline, model details, training process, and `history.csv` charts
 - DermAI Prediction: image upload, class probabilities, prediction table, and Grad-CAM overlay
 
-## Deploy on Render
+## Deploy on Streamlit Community Cloud
 
-This repository includes `render.yaml` for Render Blueprint deployment. Render installs
-the Python dependencies from `requirements.txt` and starts the Streamlit app with:
+This repository is ready for Streamlit Community Cloud deployment. Use `app.py` as the
+main app file when creating the Streamlit app.
+
+Streamlit Community Cloud installs Python dependencies from `requirements.txt`, which
+is already in the repository root. The deployed app expects an inference checkpoint at
+`outputs/efficientnet_b0/best.pt`. That checkpoint is intentionally allowed in
+`.gitignore` so it can be committed and available during deployment. The latest training
+checkpoint, `last.pt`, remains ignored.
+
+The checkpoint path can also be changed with the `DERMAI_CHECKPOINT_PATH` environment
+variable when running the app in another environment.
+
+For local development, Python is pinned to `3.12.9` in `.python-version` to match the
+environment used while developing the project.
 
 ```bash
-streamlit run app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
+streamlit run app.py
 ```
-
-The deployed app expects an inference checkpoint at `outputs/efficientnet_b0/best.pt`.
-That checkpoint is intentionally allowed in `.gitignore` so it can be committed and
-available during deployment. The latest training checkpoint, `last.pt`, remains ignored.
-
-The checkpoint path can be changed with the `DERMAI_CHECKPOINT_PATH` environment variable.
-Python is pinned to `3.12.9` in both `.python-version` and `render.yaml` to keep local and
-deployed runtimes aligned.
